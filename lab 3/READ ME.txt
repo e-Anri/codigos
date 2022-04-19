@@ -1,0 +1,5 @@
+El codigo principal es aquel que se llama pep1.m
+El reporte es aquel que se llama Loyola_Bastian.pdf
+El archivo llamado workspace pep 1 es para comprobar los datos obtenidos sin tener que ejecutar de nuevo el codigo, dado el tiempo de ejecución
+El resto de archivos son los codigo para realizar cada uno de los metodos, estos se difencian de la siguiente forma
+nombre.m codigo para el calculo de tiempo, nombreInst.m codigo para el calculo de instrucciones.
