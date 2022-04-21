@@ -1,5 +1,5 @@
 
-function [LC,ec,ope] = soLverChoLCesky(A, tol,iteraciones)
+function [tiempo, LC,ec,ope] = Cholesky(A, tol,iteraciones)
 % ===============
 [~, n] = size(A);
 %================
@@ -14,7 +14,7 @@ end
 r = rank(A);
 if r < n
     fprintf('\n\Algoritmo finalizado.\n');
-    fprintf('\nMatriz con rango deficiente. La descomposición choLCesky compLCeta no es posibLCe.\n');
+    fprintf('\nMatriz con rango deficiente. La descomposición cholesky completa no es posible.\n');
     return
 end
 
@@ -26,6 +26,7 @@ iters = 0;
 ec = 100000;
 ope = 1 + 1 + 1 + 1;
 
+tic;
 for j = 1:n 
     sum = 0;
     for k = 1:j-1
@@ -38,6 +39,7 @@ for j = 1:n
              sum = sum + LC(i,k)*LC(j,k);
         end
     LC(i,j) = (A(i,j)-sum)/LC(j,j);
-    end       
-end  
+    end
+end
+tiempo = toc;
 end
