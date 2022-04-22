@@ -1,5 +1,6 @@
-function [operaciones, x0, error] = LSQR_E(A,b,tol)
+function [x0, tiempo] = LSQR_D_T(A,b,tol)
     iteraciones = 0;
+    sparse(A);
     n=length(A);
     x0=zeros(n,1);
     %(Resolver sistema Ax = b)
@@ -13,7 +14,7 @@ function [operaciones, x0, error] = LSQR_E(A,b,tol)
     fi=beta;
     p=alpha;
     error = 1;
-    operaciones = 11;
+    tic
     while error > tol
         x1=x0;
         %Bidiagonalización 
@@ -36,14 +37,12 @@ function [operaciones, x0, error] = LSQR_E(A,b,tol)
         error = norm(x0-x1);
         errores = [errores, error];
         iteraciones = iteraciones + 1;
-        operaciones = operaciones + 17;
         if iteraciones>100
             if var(errores(end-10:end)) == 0
-                operaciones = operaciones + 1;
                 break;
             end 
         end
     end
+    tiempo = toc;
     x0 = x0(:,1);
-    operaciones = operaciones + 1;
 end

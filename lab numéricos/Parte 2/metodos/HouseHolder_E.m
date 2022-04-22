@@ -1,11 +1,11 @@
-function[Q, R, solucionHH, solucionesHH, errorHH, erroresHH] = HouseHolder_E(A, b)
+function[Q, R, solucionHH, errorHH] = HouseHolder_E(A, b)
 
 [m,n] = size(A);
 S = min(n,m-1);
 Q = eye(m,m);
 for k = 1:S
-    [x, sigma] = housecero(A(k:m,k));
-    Q(1:m,k:m) = housemult(Q(1:m,k:m),x);
+    [x, sigma] = Housecero(A(k:m,k));
+    Q(1:m,k:m) = Housemult(Q(1:m,k:m),x);
     A(k,k) = sigma;
     s1 = size(x); 
     A(k+1:m,k) = x(2:s1);
@@ -27,11 +27,8 @@ R = triu(A);
 % Ax = b -> QRx = b -> Rx = Q'b -> Rx =  z
 % Q es una matriz ortogonal y R es una triangular superior
 z = Q' * b;
-solucionHH = sustitucionProgresiva(R,z);
+[solucionHH] = sustitucionProgresiva(R,z);
 
-solucionesHH = [solucionHH,solucionHH];
 errorHH = norm(A*solucionHH-b,2);
-erroresHH = [erroresHH,errorHH];
-errorHH = min(erroresHH);
 
 end

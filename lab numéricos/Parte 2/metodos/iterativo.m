@@ -1,4 +1,4 @@
-function[x, error, errores] = GaussSeidel_E(A,b,x,tol,iters)
+function[x,errores] = (A,b,x,tol,iters)
 n = length(x);
 errores = [];
 for i=1:iters
@@ -11,8 +11,4 @@ for i=1:iters
     if error<tol
         return
     end
-end
-
-error = min(erroresSeidel_289);
-
 end

@@ -19,7 +19,7 @@ for j = 1:n
 end
 
 %Aplicamos progresivo
-[Lp, operaciones1] = progresivo(L, b);
+[Lp, operaciones1] = sustitucionProgresiva(L, b);
 
 %Aplicamos regresivo
 [soluciones, operaciones2] = sustitucionRegresiva(L', Lp);

@@ -34,9 +34,9 @@ function [x, tiempo] = Doolittle_T(A,b)
     %U*x = y
     %Se procede a realizar una sistución progresiva
     % para obtener y
-    y = progresivo(L,b);
+    y = sustitucionProgresiva(L,b);
     
     %Se hace una sustitución regresiva para obtener x 
-    x = regresivo(U,y);
+    x = sustitucionRegresiva(U,y);
     tiempo = toc;
 end
