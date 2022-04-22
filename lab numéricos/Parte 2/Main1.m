@@ -38,7 +38,7 @@ valor = 1;
 % ------ [CÁLCULO DE ERROR] ------
 
     % Gauss-Jacobi
-    [iteracionesGJ_289, solucionesGJ_289, errorGJ_289] = GaussJacobi_E(A289, b289, n, tol);
+    [iteracionesGJ_289, solucionesGJ_289, errorGJ_289] = GaussJacobi_E(A289, b289, n);
     % Doolittle
     [iteracionesDL_289, solucionesDL_289, errorDL_289] = Doolittle_E(A289, b289);
     % LSQR
@@ -46,7 +46,7 @@ valor = 1;
     % Cholesky
     [solucionesCL_289, errorCL_289, operacionesCL_289] = Cholesky_E(A289, b289);
     % Gauss-Seidel
-    [solucionesSeidel_289, errorSeidel_289, erroresSeidel_289, operacionesSeidel_289] = GaussSeidel_E(A289,b289,x0,tol,100);
+    %[solucionesSeidel_289, errorSeidel_289, erroresSeidel_289, operacionesSeidel_289] = GaussSeidel_E(A289,b289,x0,tol,100);
     % HouseHolder
     [Q_289, R_289, solucionHH_289, solucionesHH_289, errorHH_289, erroresHH_289] = HouseHolder_E(A289, b289);
 
@@ -57,7 +57,7 @@ valor = 1;
 % ------ [CÁLCULO DE TIEMPO] ------
 
     % Gauss-Jacobi
-    [solucionesGJ_289, tiempoGJ_289] = GaussJacobi_T(A289, b289, n, tol);
+    [solucionesGJ_289, tiempoGJ_289] = GaussJacobi_T(A289, b289, n);
     % Doolittle
     [solucionesDL_289, tiempoDL_289] = Doolittle_T(A289, b289);
     % LSQR
@@ -65,7 +65,7 @@ valor = 1;
     % Cholesky
     [solucionesCL_289, tiempoCL_289] = Cholesky_T(A289, b289);
     % Gauss-Seidel
-    [solucionesSeidel_289, tiempoSeidel_289] = GaussSeidel_T(A289,b289,x0);
+    %[solucionesSeidel_289, tiempoSeidel_289] = GaussSeidel_T(A289,b289,x0);
     % HouseHolder
     [Q_289, R_289, solucionHH_289, solucionesHH_289, tiempoHH_289] = HouseHolder_T(A289, b289);
 
