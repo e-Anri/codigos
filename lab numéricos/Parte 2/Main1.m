@@ -38,7 +38,7 @@ valor = 1;
 % ------ [CÁLCULO DE ERROR] ------
 
     % Gauss-Jacobi
-    [operacionesGJ_289, solucionesGJ_289, errorGJ_289] = GaussJacobi_E(A289, b289, n);
+    [operacionesGJ_289, solucionesGJ_289, errorGJ_289] = GaussJacobi_E(A289, b289, n, 400);
     % Doolittle
     [operacionesDL_289, solucionesDL_289, errorDL_289] = Doolittle_E(A289, b289);
     % LSQR
@@ -47,8 +47,17 @@ valor = 1;
     [solucionesCL_289, errorCL_289, operacionesCL_289] = Cholesky_E(A289, b289);
     % Gauss-Seidel
     [solucionesSeidel_289, errorSeidel_289, erroresSeidel_289] = GaussSeidel_E(A289, b289, x0, tol, 71);
-    % HouseHolder
-    [Q_289, R_289, solucionHH_289, errorHH_289] = HouseHolder_E(A289, b289);
+
+    %QR 
+    [Q, R, tiempoQR_289, operacionesQR1_289] = Givens(A289);
+
+    tic
+    z = Q'*b289;
+    [X_QR, operacionesQR2_289] = sustitucionRegresiva(R, z);
+    errorQR_289 = norm(Q*R - A289);
+    errorQR_289 = errorQR_289 + norm(A289*X_QR-b289);
+    operacionesQR_289 = operacionesQR1_289 + operacionesQR2_289;
+
     % LSQR DISPERSO
     [operacionesLSQRD_289, solucionLSQRD_289, errorLSQRD_289] = LSQR_D_E(A289, b289, tol);
 
@@ -66,17 +75,15 @@ valor = 1;
     % Cholesky
     [solucionesCL_289, tiempoCL_289] = Cholesky_T(A289, b289);
     % Gauss-Seidel
-    [solucionesSeidel_289, operacionesSeidel_289, tiempoSeidel_289] = GaussSeidel_T(A289,b289,x0, tol, 71);
-    % HouseHolder
-    [Q_289, R_289, solucionHH_289, tiempoHH_289] = HouseHolder_T(A289, b289);
+    [solucionesSeidel_289, operacionesSeidel_289, tiempoSeidel_289] = GaussSeidel_T(A289,b289,x0,tol,71);
     % LSQR DISPERSO
     [solucionLSQRD_289, tiempoLSQRD_289] = LSQR_D_T(A289, b289, tol);
 
 
 
 % Errores matriz 289 x 289
-vectorErrores_289 = [errorGJ_289, errorDL_289, errorLSQR_289, errorCL_289, errorSeidel_289, errorLSQRD_289];
-vectorNombre = categorical({'Gauss-Jacobi','Doolittle','LSQR', 'Cholesky', 'Gauss-Seidel', 'LSQR Disperso'});
+vectorErrores_289 = [errorGJ_289, errorDL_289, errorLSQR_289, errorCL_289, errorSeidel_289, errorLSQRD_289, errorQR_289];
+vectorNombre = categorical({'Gauss-Jacobi','Doolittle','LSQR', 'Cholesky', 'Gauss-Seidel', 'LSQR Disperso', 'Givens'});
 figure
 hold on
 bar(vectorNombre, vectorErrores_289)
@@ -88,12 +95,11 @@ hold off
 
 
 % Costo espacial matriz 289 x 289
-[~, ~, operacionesHH_289] = HouseHolderInst(A289);
-vectorOperaciones_289 = [operacionesGJ_289, operacionesDL_289, operacionesLSQR_289, operacionesCL_289, operacionesSeidel_289, operacionesHH_289, operacionesLSQRD_289];
+vectorOperaciones_289 = [operacionesGJ_289, operacionesDL_289, operacionesLSQR_289, operacionesCL_289, operacionesSeidel_289, operacionesQR_289, operacionesLSQRD_289];
 
 
 %Costo Temporal matriz 289 x 289
-vectorTiempos_289 = ['Gauss Jacobi - '+string(tiempoGJ_289)+'[s]' 'LU - '+ string(tiempoDL_289)+'[s]' 'LSQR - '+string(tiempoLSQR_289)+'[s]' 'Cholesky - ' + string(tiempoCL_289) + '[s]' 'Gauss-Seidel - '+ string(tiempoSeidel_289) + '[s]' 'HouseHolder - ' + string(tiempoHH_289) + '[s]' 'LSQR Disperso - ' + string(tiempoLSQRD_289)];
+vectorTiempos_289 = ['Gauss Jacobi - '+string(tiempoGJ_289)+'[s]' 'LU - '+ string(tiempoDL_289)+'[s]' 'LSQR - '+string(tiempoLSQR_289)+'[s]' 'Cholesky - ' + string(tiempoCL_289) + '[s]' 'Gauss-Seidel - '+ string(tiempoSeidel_289) + '[s]' 'Givens - ' + string(tiempoQR_289) + '[s]' 'LSQR Disperso - ' + string(tiempoLSQRD_289)];
 vectorTiempos_289 = categorical(vectorTiempos_289);
 figure
 hold on
