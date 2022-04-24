@@ -1,4 +1,4 @@
-function[soluciones, tiempo] = GaussJacobi_T(A, b, n)
+function[soluciones, tiempo] = GaussJacobi_T(A, b, n, iters)
     iteraciones = 0;
     %Se inicializa la matriz de soluciones como una matriz de ceros
     x = zeros(1, n);
@@ -11,7 +11,7 @@ function[soluciones, tiempo] = GaussJacobi_T(A, b, n)
     [ filas, columnas ] = size(aumMat);
     %Se itera de acuerdo al maximo de iteraciones
     tic
-    while iteraciones < 200
+    while iteraciones < iters
         %Se itera de acuerdo al tamaño de las filas de la matriz aumentada.
         for i = 1:filas
             %Se usa la fórmula del método de Jacobi.

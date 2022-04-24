@@ -67,7 +67,7 @@ valor = 1;
 % ------ [CÁLCULO DE TIEMPO] ------
 
     % Gauss-Jacobi
-    [solucionesGJ_289, tiempoGJ_289] = GaussJacobi_T(A289, b289, n);
+    [solucionesGJ_289, tiempoGJ_289] = GaussJacobi_T(A289, b289, n, 400);
     % Doolittle
     [solucionesDL_289, tiempoDL_289] = Doolittle_T(A289, b289);
     % LSQR
@@ -75,7 +75,7 @@ valor = 1;
     % Cholesky
     [solucionesCL_289, tiempoCL_289] = Cholesky_T(A289, b289);
     % Gauss-Seidel
-    [solucionesSeidel_289, operacionesSeidel_289, tiempoSeidel_289] = GaussSeidel_T(A289,b289,x0,tol,71);
+    [solucionesSeidel_289, operacionesSeidel_289, tiempoSeidel_289] = GaussSeidel_T(A289,b289,x0,71);
     % LSQR DISPERSO
     [solucionLSQRD_289, tiempoLSQRD_289] = LSQR_D_T(A289, b289, tol);
 
@@ -99,7 +99,7 @@ vectorOperaciones_289 = [operacionesGJ_289, operacionesDL_289, operacionesLSQR_2
 
 
 %Costo Temporal matriz 289 x 289
-vectorTiempos_289 = ['Gauss Jacobi - '+string(tiempoGJ_289)+'[s]' 'LU - '+ string(tiempoDL_289)+'[s]' 'LSQR - '+string(tiempoLSQR_289)+'[s]' 'Cholesky - ' + string(tiempoCL_289) + '[s]' 'Gauss-Seidel - '+ string(tiempoSeidel_289) + '[s]' 'Givens - ' + string(tiempoQR_289) + '[s]' 'LSQR Disperso - ' + string(tiempoLSQRD_289)];
+vectorTiempos_289 = ['Gauss Jacobi - '+string(tiempoGJ_289)+'[s]' 'Doolittle - '+ string(tiempoDL_289)+'[s]' 'LSQR - '+string(tiempoLSQR_289)+'[s]' 'Cholesky - ' + string(tiempoCL_289) + '[s]' 'Gauss-Seidel - '+ string(tiempoSeidel_289) + '[s]' 'Givens - ' + string(tiempoQR_289) + '[s]' 'LSQR Disperso - ' + string(tiempoLSQRD_289)];
 vectorTiempos_289 = categorical(vectorTiempos_289);
 figure
 hold on

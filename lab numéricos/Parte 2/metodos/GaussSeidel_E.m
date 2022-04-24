@@ -13,6 +13,6 @@ for i=1:iters
     end
 end
 
-error = min(erroresSeidel_289);
+error = min(errores);
 
 end
