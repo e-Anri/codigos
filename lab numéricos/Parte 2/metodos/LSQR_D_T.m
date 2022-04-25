@@ -1,6 +1,6 @@
 function [x0, tiempo] = LSQR_D_T(A,b,tol)
+    A = sparse(A);
     iteraciones = 0;
-    sparse(A);
     n=length(A);
     x0=zeros(n,1);
     %(Resolver sistema Ax = b)

@@ -1,4 +1,4 @@
-function[operaciones, soluciones, error] = GaussJacobi_E(A, b, n, iters)
+function[soluciones, error] = GaussJacobi_E(A, b, n, iters)
     iteraciones = 0;
     %Se inicializa la matriz de soluciones como una matriz de ceros
     x = zeros(1, n);
@@ -12,9 +12,8 @@ function[operaciones, soluciones, error] = GaussJacobi_E(A, b, n, iters)
     aumMat = [ A b ];
     [ filas, columnas ] = size(aumMat);
     error = 1;
-    operaciones = 6;
     %Se itera de acuerdo a la tolerancia
-    while iteraciones < iters
+    while iteraciones < iters && error ~= 0
         %Se itera de acuerdo al tamaño de las filas de la matriz aumentada.
         for i = 1:filas
             %Se usa la fórmula del método de Jacobi.
@@ -26,9 +25,7 @@ function[operaciones, soluciones, error] = GaussJacobi_E(A, b, n, iters)
         x(:, 1) = aux(:, 1);
         error = norm(errores);
         iteraciones = iteraciones + 1;
-        operaciones = operaciones + 4;
 
     end
     soluciones = x;
-    operaciones = operaciones + 1;
 end

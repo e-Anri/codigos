@@ -1,15 +1,21 @@
-function[x, inst, tiempo] = GaussSeidel_T(A,b,x,iters)
+function[x, tiempo] = GaussSeidel_T(A,b,n,iters)
+    error = 1;
+    k = 0;
+    x = zeros(n, 1);
     tic
-    inst = 0;
-    n = length(x);
-    for i=1:iters
-        w=x;
-        for i=i:n
-            x(i) = (b(i)-A(i,1:i-1)*x(1:i-1)-A(i,i+1:n)*x(i+1:n))/A(i,i);
-            inst = inst + 2 + (i-1)*(i-1) + 1 + (n-i+1)*(n-i+1);
+    while k<iters && error ~= 0
+        x_old=x;
+        for i=1:n
+            sigma=0;
+            for j=1:i-1
+                    sigma=sigma+A(i,j)*x(j);
+            end
+            for j=i+1:n
+                    sigma=sigma+A(i,j)*x_old(j);
+            end
+            x(i)=(1/A(i,i))*(b(i)-sigma);
         end
-        inst = inst + 1;
+        k=k+1;
     end
-
     tiempo = toc;
 end
