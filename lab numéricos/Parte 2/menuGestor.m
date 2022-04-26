@@ -25,29 +25,29 @@ while true
             tol = 0.0000000001;
             n = 289;
 
-            [nombre, error, tiempo, tiempo2] = Main1(efi, A289, b289, tol, n);
-            tiempo3 = toc; % tiempo de todo junto
-
-            % se le resta al tiempo total el tiempo de calcular el 
-            % método con error
-            tiempoFinal = tiempo3 - tiempo2 + tiempo;
+            [nombre, error, tiempo, operaciones] = Main1(efi, A289, b289, tol, n);
+            tiempo2 = toc; 
             
+            operacionesGestor = operaciones + 12;
 
             figure
             hold on
             bar(categorical(nombre), error)
-            title('Error del método gestionado para matriz 289 x 289')
+            title('Error del método gestionado para matriz 289 x 289 con ' + string(efi) + '% de eficiencia')
             ylabel('Error')
             xlabel('Método')
             hold off
+            
+            vectorTiempo = [string(nombre)+ string(tiempo) + '[s]' + ' Gestor - ' + string(tiempo2) + '[s]'];
+            vectorTiempo = categorical(vectorTiempo);
+            vectorOperaciones = [operacionesGestor operaciones];
 
             figure
             hold on
-            vectorTiempo = [tiempo, tiempoFinal];
-            nombres = [nombre, categorical({'Gestor'})];
-            bar(nombres, vectorTiempo)
-            title('Tiempo del método y el gestor para matriz 289 x 289')
-            ylabel('Tiempo')
+            %nombres = [nombre, categorical({'Gestor'})];
+            bar(vectorTiempo, vectorOperaciones)
+            title('Tiempo del método gestionado para matriz 289 x 289 con ' + string(efi) + '% de eficiencia')
+            ylabel('Operaciones')
             xlabel('Método/Gestor')
             hold off
             
@@ -71,24 +71,28 @@ while true
             tol = 0.0000000001;
             n = 1089;
 
-            [nombre, error, tiempo] = Main2(efi, A1089, b1089, tol, n);
+            [nombre, error, tiempo, operaciones] = Main2(efi, A1089, b1089, tol, n);
             tiempo2 = toc;
 
             figure
             hold on
             bar(categorical(nombre), error)
-            title('Error del método gestionado para matriz 1089 x 1089')
+            title('Error del método gestionado para matriz 1089 x 1089 con ' + string(efi) + '% de eficiencia')
             ylabel('Error')
             xlabel('Método')
             hold off
 
+            operacionesGestor = operaciones + 12;
+            vectorTiempo = [string(nombre)+ string(tiempo) + '[s]' + ' Gestor - ' + string(tiempo2) + '[s]'];
+            vectorTiempo = categorical(vectorTiempo);
+            vectorOperaciones = [operacionesGestor operaciones];
+
             figure
             hold on
-            vectorTiempo = [tiempo, tiempo2];
-            nombres = [nombre, categorical({'Gestor'})];
-            bar(nombres, vectorTiempo)
-            title('Tiempo del método y el gestor para matriz 1089 x 1089')
-            ylabel('Tiempo')
+            %nombres = [nombre, categorical({'Gestor'})];
+            bar(vectorTiempo, vectorOperaciones)
+            title('Tiempo del método gestionado para matriz 289 x 289 con ' + string(efi) + '% de eficiencia')
+            ylabel('Operaciones')
             xlabel('Método/Gestor')
             hold off
             break;
@@ -108,32 +112,36 @@ while true
             
             % se define la tolerancia e-10
             tol = 0.0000000001;
-            n = 289;
+            n = 4225;
 
-            [nombre, error, tiempo, tiempo2] = Main3(efi, A4225, b4225, tol, n);
-            tiempo3 = toc; % tiempo de todo junto
-
-            % se le resta al tiempo total el tiempo de calcular el 
-            % método con error
-            tiempoFinal = tiempo3 - tiempo2;
+            [nombre, error, tiempo, operaciones] = Main3(efi, A4225, b4225, tol, n);
+            tiempo2 = toc; % tiempo de todo junto
 
             figure
             hold on
             bar(categorical(nombre), error)
-            title('Error del método gestionado para matriz 4225 x 4225')
+            title('Error del método gestionado para matriz 4225 x 4225 con ' + string(efi) + '% de eficiencia')
             ylabel('Error')
             xlabel('Método')
             hold off
 
+            operacionesGestor = operaciones + 12;
+            vectorTiempo = [string(nombre)+ string(tiempo) + '[s]' + ' Gestor - ' + string(tiempo2) + '[s]'];
+            vectorTiempo = categorical(vectorTiempo);
+            vectorOperaciones = [operacionesGestor operaciones];
+
             figure
             hold on
-            vectorTiempo = [tiempo, tiempoFinal];
-            nombres = [nombre, categorical({'Gestor'})];
-            bar(nombres, vectorTiempo)
-            title('Tiempo del método y el gestor para matriz 4225 x 4225')
-            ylabel('Tiempo')
+            %nombres = [nombre, categorical({'Gestor'})];
+            bar(vectorTiempo, vectorOperaciones)
+            title('Tiempo del método gestionado para matriz 289 x 289 con ' + string(efi) + '% de eficiencia')
+            ylabel('Operaciones')
             xlabel('Método/Gestor')
             hold off
+
+            filename = 'data.mat';
+            save(filename)
+
             break;
         else
             disp('Por favor, selecciona un porcentaje válido.');

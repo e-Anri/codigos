@@ -12,7 +12,9 @@ b4225 = load('./datos/b4225.dat');
 
 % se define la tolerancia e-10
 tol = 0.0000000001;
-n = 289;
+n1 = 289;
+n2 = 1089;
+n3 = 4225;
 x0 = ones(length(b289),1);
 
 

@@ -1,4 +1,4 @@
-function [x0, error] = LSQR_E(A,b,tol)
+function [x0, error, operaciones] = LSQR_E(A,b,tol)
     iteraciones = 0;
     n=length(A);
     x0=zeros(n,1);
@@ -13,6 +13,7 @@ function [x0, error] = LSQR_E(A,b,tol)
     fi=beta;
     p=alpha;
     error = 1;
+    operaciones = 12;
     while error > tol
         x1=x0;
         %Bidiagonalización 
@@ -35,11 +36,14 @@ function [x0, error] = LSQR_E(A,b,tol)
         error = norm(x0-x1);
         errores = [errores, error];
         iteraciones = iteraciones + 1;
+        operaciones = operaciones + 17;
         if iteraciones>100
             if var(errores(end-10:end)) == 0
+                operaciones = operaciones + 1;
                 break;
             end 
         end
     end
     x0 = x0(:,1);
+    operaciones = operaciones + 1;
 end
