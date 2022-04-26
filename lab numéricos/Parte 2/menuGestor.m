@@ -138,10 +138,6 @@ while true
             ylabel('Operaciones')
             xlabel('Método/Gestor')
             hold off
-
-            filename = 'data.mat';
-            save(filename)
-
             break;
         else
             disp('Por favor, selecciona un porcentaje válido.');

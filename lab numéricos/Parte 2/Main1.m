@@ -128,7 +128,7 @@ function [nombre, error, tiempo, operaciones] = Main1(efi, A289, b289, tol, n)
 
 
 
-%  % Costo Temporal
+%  % Costo Temporal matriz 289 x 289
 %  tiempos_289 = [tiempoGJ_289, tiempoDL_289, tiempoLSQR_289, tiempoCL_289, tiempoSeidel_289, tiempoLSQRD_289, tiempoGS_289];
 %  figure
 %  hold on
